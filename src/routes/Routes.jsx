@@ -1,5 +1,5 @@
-import Navbar from "../components/Navbar.jsx";
-import Sidebar from "../components/Sidebar.jsx";
+import Navbar from "../components/ui/Navbar.jsx";
+import Sidebar from "../components/ui/sidebar.jsx";
 import Home from "../pages/Home.jsx";
 import Products from "../pages/Products.jsx";
 import Cart from "../pages/Cart.jsx";

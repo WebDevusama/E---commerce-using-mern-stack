@@ -1,14 +1,20 @@
+import { CalendarIcon } from "lucide-react"
+
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card"
-import "./Home.css";
-export default function Home() {
+
+export function HoverCardDemo() {
   return (
-    <>
-      <h1 id="heading">Welcome to E-Commerce</h1>
-      <HoverCard>
+    <HoverCard>
       <HoverCardTrigger asChild>
         <Button variant="link">@nextjs</Button>
       </HoverCardTrigger>
@@ -30,24 +36,5 @@ export default function Home() {
         </div>
       </HoverCardContent>
     </HoverCard>
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </>
   )
 }

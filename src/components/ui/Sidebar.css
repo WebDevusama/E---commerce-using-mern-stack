@@ -1,4 +1,5 @@
 /* Sidebar.css - basic styling for e-commerce sidebar */
+@import "tailwindcss";
 :root{
   --sidebar-bg: #0f1724;
   --sidebar-fg: #e6eef8;
