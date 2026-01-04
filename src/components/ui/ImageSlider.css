@@ -1,0 +1,19 @@
+.image-slider {
+  width: 100%;
+  max-width: 800px;
+  margin: 39px auto;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-left: 280px;
+  margin-top: -700px;
+
+}
+
+.image-slider img {
+  
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

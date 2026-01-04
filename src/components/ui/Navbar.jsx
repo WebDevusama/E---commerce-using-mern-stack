@@ -32,7 +32,6 @@ const Navbar = () => {
       <div className="navbar-right">
        
         
-        <div className="nav-item">💬<span>Message</span></div>
         <div className="nav-item">❤️<span>Orders</span></div>
         <div className="nav-item">🔔<span>Notifications</span></div>
         <div className="nav-item">🌐<span>EN</span></div>
