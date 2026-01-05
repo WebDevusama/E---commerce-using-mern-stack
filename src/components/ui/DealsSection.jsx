@@ -1,23 +1,27 @@
 import React from "react";
-import "../styles/deals.css";
+import "../ui/deals.css";
 
 const deals = [
-  { title: "Smart watches", discount: "-25%", img: "/images/watch.png" },
-  { title: "Laptops", discount: "-15%", img: "/images/laptop.png" },
-  { title: "GoPro cameras", discount: "-40%", img: "/images/camera.png" },
-  { title: "Headphones", discount: "-25%", img: "/images/headphone.png" },
-  { title: "Canon cameras", discount: "-25%", img: "/images/phone.png" },
+  { title: "Smart watches", discount: "-25%", img: "./assets/Images/tech/8.png" },
+  { title: "Laptops", discount: "-15%", img: "./assets/Images/tech/image 34.png" },
+  { title: "GoPro cameras", discount: "-40%", img: "./assets/Images/tech/6.png" },
+  { title: "Headphones", discount: "-25%", img: "./assets/Images/tech/image 29.png" },
+  { title: "Canon cameras", discount: "-25%", img: "./assets/Images/tech/6.png" },
 ];
 
 const categories = [
-  { title: "Soft chairs", price: "From USD 19", img: "/images/chair.png" },
-  { title: "Sofa & chair", price: "From USD 19", img: "/images/sofa.png" },
-  { title: "Kitchen dishes", price: "From USD 19", img: "/images/dishes.png" },
-  { title: "Smart watches", price: "From USD 19", img: "/images/watch.png" },
-  { title: "Kitchen mixer", price: "From USD 100", img: "/images/mixer.png" },
-  { title: "Blenders", price: "From USD 39", img: "/images/blender.png" },
-  { title: "Home appliance", price: "From USD 19", img: "/images/appliance.png" },
-  { title: "Coffee maker", price: "From USD 10", img: "/images/coffee.png" },
+  { title: "Soft chairs", price: "From USD 19", img: "./assets/Images/interior/1.png" },
+  { title: "Blenders", price: "From USD 39", img: "./assets/Images/interior/9.png" },
+  { title: "Home appliance", price: "From USD 19", img: "./assets/Images/interior/6.png" },
+  { title: "Coffee maker", price: "From USD 10", img: "./assets/Images/interior/8.png" },
+  { title: "Pot", price: "From USD 10", img: "./assets/Images/interior/3.png" },
+  { title: "Stand", price: "From USD 10", img: "./assets/Images/interior/7.png" },
+  { title: "Show-pisc", price: "From USD 10", img: "./assets/Images/interior/image 89.png" },
+  { title: "Matress", price: "From USD 10", img: "./assets/Images/interior/image 93.png" },
+  { title: "Coffee maker", price: "From USD 10", img: "./assets/Images/interior/8.png" },
+
+
+
 ];
 
 export default function DealsSection() {

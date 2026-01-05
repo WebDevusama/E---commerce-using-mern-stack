@@ -5,13 +5,13 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import DealsSection from '../ui/DealsSection'
+
 
 export default function CardGroup() {
   return (
     <Container fluid="lg" className="mt-4">
 
-      <div className="homepage-wrapper">
+      <div className="homepage-wrapper" style={{width:'1330px'}}>
 
         <Row className="gy-4 align-items-start">
 
@@ -84,7 +84,6 @@ export default function CardGroup() {
 
         </Row>
       </div>
-      <DealsSection/>
     </Container>
     
     
