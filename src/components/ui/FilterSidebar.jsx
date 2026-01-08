@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./Sidebar.css"; // ✅ Correct CSS import
+import "./Sidebar.css"; 
 
 const categories = [
   "Mobile accessory",

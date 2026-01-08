@@ -1,32 +1,42 @@
-import Home from "../pages/Home.jsx";
-import Products from "../pages/ProductPage.jsx";
-import Profile from "../pages/Profile.jsx";
-// import FilterSidebar from '../pages/FilterSidebar';
+import { Routes, Route, Navigate } from "react-router-dom";
 
-import { Routes, Route } from "react-router-dom";
+import Home from "../pages/Home";
+import Products from "../pages/ProductPage";
+import Profile from "../pages/Profile";
+import Login from "../pages/Login";
+import Dashboard from "../components/ui/Dashborad";
 
-export default function Routing() {
+export default function AppRoutes() {
+  const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+
   return (
-    <>
-      
-      <div className="min-h-screen flex flex-col">
-        <main className="grow">
-      
-      
+    <div className="min-h-screen flex flex-col">
+      <main className="grow">
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/" element={<Home />} />
+          <Route path="/productPage" element={<Products />} />
+          <Route path="/login" element={<Login />} />
 
-      <Routes>
-        
-        <Route path="/" element={<Home />} />
-        
-        <Route path="/productPage" element={<Products />}  />
-        <Route path="/profile" element={<Profile />} />
-        {/* <Route path="/FilterSidebar" element={<FilterSidebar />} /> */}
-        
-      </Routes>
-      
-      
-        </main>
-      </div>
-    </>
+          {/* Protected Routes */}
+          <Route
+            path="/profile"
+            element={
+              isAuthenticated ? <Profile /> : <Navigate to="/login" replace />
+            }
+          />
+
+          <Route
+            path="/dashboard"
+            element={
+              isAuthenticated ? <Dashboard /> : <Navigate to="/login" replace />
+            }
+          />
+
+          {/* Fallback */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </main>
+    </div>
   );
 }

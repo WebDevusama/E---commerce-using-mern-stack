@@ -1,17 +1,18 @@
 import './Home.css'
-import Card from '../components/ui/Card'
+import Navbar from '@/components/ui/Navbar'
+import Card from '../components/ui/ProfileCard'
 import DealsSection from '@/components/ui/DealsSection'
 import Clothes from '../components/ui/Clothes'
-import ProductPage from './ProductPage'
 import Footer from "../components/ui/Footer.jsx";
 export default function Home() {
   return (
     <>
+       <Navbar/>
+       
       <Card/>
       <DealsSection/>
       <Clothes/>
-     
-    <Footer />
+      <Footer />
 
     </>
     

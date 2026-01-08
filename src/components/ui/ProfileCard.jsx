@@ -5,9 +5,12 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { useNavigate } from "react-router-dom";
 
 
 export default function CardGroup() {
+    const navigate = useNavigate();
+
   return (
     <Container fluid="lg" className="mt-4">
 
@@ -66,7 +69,7 @@ export default function CardGroup() {
 
                 {/* Buttons */}
                 <div className="d-grid gap-2 mb-2 w-100">
-                  <Button variant="primary" size="sm">Login</Button>
+                  <Button  onClick={() => navigate("/Login")} variant="primary" size="sm">Login</Button>
                   <Button variant="outline-secondary" size="sm">View Profile</Button>
                 </div>
 
