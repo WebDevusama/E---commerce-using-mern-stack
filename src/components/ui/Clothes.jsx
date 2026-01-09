@@ -64,7 +64,7 @@ export default function Clothes() {
             <img src={p.img} alt={p.name} />
             <h4>{p.price}</h4>
             <p>{p.name}</p>
-            <button onClick={() => viewProduct(p.name)}>View</button>
+            <button onClick={() => viewProduct(p.name)}>Add-to-Cart</button>
           </div>
         ))}
       </div>
