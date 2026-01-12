@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Row, Col, ListGroup, Image, Button, Card } from "react-bootstrap";
-import Message from "../components/Message";
-import { useCart } from "./CartContext";
+//  import Message from "../components/Message";
+import { useCart } from "../CartContext";
 
 const Cart = () => {
   const { cartItems } = useCart();
-
+  
   return (
     <Row>
       <Col md={8}>

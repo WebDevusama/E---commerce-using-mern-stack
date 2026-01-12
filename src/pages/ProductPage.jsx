@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import FilterSidebar from "../components/ui/FilterSidebar";
 import ProductCard from "../pages/PhonesCard";
 import { useCart } from "../CartContext";
 
 export default function ProductPage() {
   const { addToCart } = useCart();
+  const navigate = useNavigate(); // ✅ ADD THIS
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -13,10 +15,7 @@ export default function ProductPage() {
     const fetchProducts = async () => {
       try {
         const response = await axios.get("https://fakestoreapi.com/products");
-
-        // 🔁 Duplicate products to show MORE items
         const extendedProducts = [...response.data, ...response.data];
-
         setProducts(extendedProducts);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -32,9 +31,14 @@ export default function ProductPage() {
     return <div className="text-center py-10">Loading products...</div>;
   }
 
+  // ✅ HANDLE ADD TO CART + NAVIGATION
+  const handleAddToCart = (product) => {
+    addToCart(product);
+    navigate("/Cart"); // ✅ MOVE TO CART PAGE
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-6">
-      {/* Top Bar */}
       <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
         <p className="text-sm text-gray-600">
           {products.length} items in{" "}
@@ -49,33 +53,18 @@ export default function ProductPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        {/* Sidebar */}
         <div className="hidden lg:block">
           <FilterSidebar />
         </div>
 
-        {/* Products */}
         <div className="lg:col-span-3">
-          {/* ✅ RESPONSIVE PRODUCT GRID */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {products.map((product) => (
               <ProductCard
-                key={`${product.id}-${Math.random()}`}
+                key={product.id}
                 product={product}
-                onAddToCart={() => addToCart(product)}
+                onAddToCart={() => handleAddToCart(product)} // ✅ FIXED
               />
-            ))}
-          </div>
-
-          {/* Pagination */}
-          <div className="flex justify-center gap-2 mt-8">
-            {[1, 2, 3, 4].map((n) => (
-              <button
-                key={n}
-                className="px-3 py-1 border rounded hover:bg-gray-100"
-              >
-                {n}
-              </button>
             ))}
           </div>
         </div>

@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
+
 import {
   FaHeart,
   FaBell,
@@ -68,13 +69,15 @@ const Navbar = () => {
   <span>Payments</span>
 </div>
 
-<div className="nav-item">
-  <FaShoppingCart className="icon" />
-  <span>Cart</span>
-</div>
+ <div className="nav-item">
+      <FaShoppingCart className="icon" />
 
+      <button onClick={() => navigate("/Cart")}>
+        <span>Cart</span>
 
+      </button>
 
+    </div>
 
       </div>
     </div>

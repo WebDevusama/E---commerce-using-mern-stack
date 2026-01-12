@@ -5,6 +5,7 @@ import Products from "../pages/ProductPage";
 import Profile from "../pages/Profile";
 import Login from "../pages/Login";
 import Dashboard from "../components/ui/Dashborad";
+import Cart from "../pages/Cart";
 
 export default function AppRoutes() {
   const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
@@ -15,8 +16,9 @@ export default function AppRoutes() {
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<Home />} />
-          <Route path="/productPage" element={<Products />} />
+          <Route path="/products" element={<Products />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/cart" element={<Cart />} />
 
           {/* Protected Routes */}
           <Route
@@ -31,6 +33,12 @@ export default function AppRoutes() {
             element={
               isAuthenticated ? <Dashboard /> : <Navigate to="/login" replace />
             }
+          />
+
+          {/* Redirect OLD / WRONG URL */}
+          <Route
+            path="/productPage"
+            element={<Navigate to="/products" replace />}
           />
 
           {/* Fallback */}
