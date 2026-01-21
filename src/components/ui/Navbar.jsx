@@ -1,6 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
-
+import {
+  FaHeart,
+  FaBell,
+  FaGlobe,
+  FaMoon,
+  FaMapMarkerAlt,
+  FaCreditCard,
+  FaShoppingCart,
+} from "react-icons/fa";
 const Navbar = () => {
   const navigate = useNavigate();
   return (
@@ -30,14 +38,42 @@ const Navbar = () => {
 
       {/* Right: Icons */}
       <div className="navbar-right">
-       
-        
-        <div className="nav-item">❤️<span>Orders</span></div>
-        <div className="nav-item">🔔<span>Notifications</span></div>
-        <div className="nav-item">🌐<span>EN</span></div>
-        <div className="nav-item">💡<span>Dark Mode</span></div>
-        <div className="nav-item">📍<span>Location</span></div>
-        <div className="nav-item">💳<span>Payments</span></div>
+      <div className="nav-item">
+  <FaHeart className="icon" />
+  <span>Orders</span>
+</div>
+
+<div className="nav-item">
+  <FaBell className="icon" />
+  <span>Notifications</span>
+</div>
+
+<div className="nav-item">
+  <FaGlobe className="icon" />
+  <span>EN</span>
+</div>
+
+<div className="nav-item">
+  <FaMoon className="icon" />
+  <span>Dark Mode</span>
+</div>
+
+<div className="nav-item">
+  <FaMapMarkerAlt className="icon" />
+  <span>Location</span>
+</div>
+
+<div className="nav-item">
+  <FaCreditCard className="icon" />
+  <span>Payments</span>
+</div>
+
+<div className="nav-item">
+  <FaShoppingCart className="icon" />
+  <span>Cart</span>
+</div>
+
+
 
 
       </div>

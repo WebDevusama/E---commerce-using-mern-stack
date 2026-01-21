@@ -11,10 +11,11 @@ export default function ProductCard({ product }) {
     <div className="flex flex-col sm:flex-row gap-4 border rounded-lg p-4 bg-white">
       
       <img
-        src={product.image}
-        alt=""
+        src={'./assets/Images/tech/6.png'}
+        alt="camera-image"
         className="w-32 h-32 object-cover mx-auto sm:mx-0"
       />
+      
 
       <div className="flex-1">
         <h3 className="font-semibold">{product.name}</h3>
@@ -37,8 +38,8 @@ export default function ProductCard({ product }) {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </p>
 
-        <button className="mt-2 text-blue-600 text-sm">
-          View details
+        <button className="mt-2 text-red-600 text-sm">
+          Add-To-cart
         </button>
       </div>
 
