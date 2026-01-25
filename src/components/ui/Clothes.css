@@ -3,6 +3,12 @@
   padding: 16px;
 }
 
+/* Dark mode */
+body.dark .home {
+  background-color: #1f2937;
+  color: #f9fafb;
+}
+
 /* HERO */
 .hero {
   display: flex;
@@ -26,6 +32,11 @@
   border-radius: 10px;
   flex: 1;
   min-width: 250px;
+}
+
+body.dark .hero-form {
+  background: #374151;
+  color: #f9fafb;
 }
 
 .hero-form input,
@@ -68,6 +79,12 @@
   border-radius: 10px;
 }
 
+body.dark .product-card {
+  border-color: #6b7280;
+  background-color: #374151;
+  color: #f9fafb;
+}
+
 .product-card img {
   width: 100%;
   height: 150px;
@@ -96,4 +113,10 @@
   border: 1px solid #ccc;
   cursor: pointer;
   background: #f9f9f9;
+}
+
+body.dark .services button {
+  border-color: #6b7280;
+  background: #4b5563;
+  color: #f9fafb;
 }

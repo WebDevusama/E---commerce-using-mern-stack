@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { FunctionComponent } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import CheckoutRoutes from '../pages/checkout';
+import CheckoutRoutes from '../routes/checkout-routes';
 
 export const Checkout: FunctionComponent = () => {
   const location = useLocation();

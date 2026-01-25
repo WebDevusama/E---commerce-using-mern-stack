@@ -7,7 +7,8 @@ import { useCart } from "../CartContext";
 
 export default function ProductPage() {
   const { addToCart } = useCart();
-  const navigate = useNavigate(); // ✅ ADD THIS
+  const navigate = useNavigate();
+
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -15,7 +16,10 @@ export default function ProductPage() {
     const fetchProducts = async () => {
       try {
         const response = await axios.get("https://fakestoreapi.com/products");
+
+        // ⚠️ If you want duplicates for testing, keys must be unique
         const extendedProducts = [...response.data, ...response.data];
+
         setProducts(extendedProducts);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -27,18 +31,18 @@ export default function ProductPage() {
     fetchProducts();
   }, []);
 
+  const handleAddToCart = (product) => {
+    addToCart(product);
+    navigate("/Cart");
+  };
+
   if (loading) {
     return <div className="text-center py-10">Loading products...</div>;
   }
 
-  // ✅ HANDLE ADD TO CART + NAVIGATION
-  const handleAddToCart = (product) => {
-    addToCart(product);
-    navigate("/Cart"); // ✅ MOVE TO CART PAGE
-  };
-
   return (
     <div className="max-w-7xl mx-auto px-4 py-6">
+      {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
         <p className="text-sm text-gray-600">
           {products.length} items in{" "}
@@ -52,6 +56,7 @@ export default function ProductPage() {
         </select>
       </div>
 
+      {/* Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         <div className="hidden lg:block">
           <FilterSidebar />
@@ -59,16 +64,15 @@ export default function ProductPage() {
 
         <div className="lg:col-span-3">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {products.map((product) => (
+            {products.map((product, index) => (
               <ProductCard
-                key={product.id}
+                key={`${product.id}-${index}`} // ✅ FIXED key issue
                 product={product}
-                onAddToCart={() => handleAddToCart(product)} // ✅ FIXED
+                onAddToCart={() => handleAddToCart(product)}
               />
             ))}
           </div>
         </div>
-
       </div>
     </div>
   );

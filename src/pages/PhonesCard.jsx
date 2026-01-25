@@ -9,17 +9,13 @@ export default function ProductCard({ product, onAddToCart }) {
 
   return (
     <div className="flex flex-col sm:flex-row gap-4 border rounded-lg p-4 bg-white hover:shadow">
-      
+
       {/* Product Image */}
       <img
-        src={'./assets/Images/tech/6.png'}
-        alt="camera-image"
-        className="w-32 h-32 object-cover mx-auto sm:mx-0"
         src={product.image}
         alt={product.title}
         className="w-32 h-32 object-contain mx-auto sm:mx-0"
       />
-      
 
       {/* Product Info */}
       <div className="flex-1">
@@ -33,9 +29,9 @@ export default function ProductCard({ product, onAddToCart }) {
           </span>
         </div>
 
-        {/* ✅ FIXED RATING */}
+        {/* Rating */}
         <div className="text-sm text-gray-500 mt-1">
-          ⭐ {product.rating?.rate} · {product.rating?.count} orders ·
+          ⭐ {product.rating?.rate || 0} · {product.rating?.count || 0} orders ·
           <span className="text-green-600"> Free Shipping</span>
         </div>
 
@@ -43,11 +39,9 @@ export default function ProductCard({ product, onAddToCart }) {
           High quality product with excellent customer reviews.
         </p>
 
-        <button className="mt-2 text-red-600 text-sm">
-          Add-To-cart
         <button
-          onClick={onAddToCart}
-          className="mt-2 text-red-600 text-sm hover:underline"
+          onClick={() => onAddToCart(product)}
+          className="mt-3 text-red-600 text-sm hover:underline"
         >
           Add to cart
         </button>

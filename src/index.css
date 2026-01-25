@@ -1,0 +1,43 @@
+/* Global styles */
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: white;
+  color: black;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark {
+  background-color: #1f2937;
+  color: #f9fafb;
+}
+
+/* Dark mode for common elements */
+body.dark h1, body.dark h2, body.dark h3, body.dark h4, body.dark p {
+  color: #f9fafb;
+}
+
+body.dark button {
+  background-color: #374151;
+  color: #f9fafb;
+  border-color: #6b7280;
+}
+
+body.dark button:hover {
+  background-color: #4b5563;
+}
+
+body.dark input, body.dark textarea, body.dark select {
+  background-color: #374151;
+  color: #f9fafb;
+  border-color: #6b7280;
+}
+
+body.dark input::placeholder, body.dark textarea::placeholder {
+  color: #9ca3af;
+}

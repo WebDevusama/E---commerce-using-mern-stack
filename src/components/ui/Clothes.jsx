@@ -1,5 +1,6 @@
 import "./clothes.css";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../../CartContext";
 
 const products = [
   { id: 1, name: "T-shirt for men", price: "$10.30", img: "../assets/Layout/alibaba/Image/cloth/Bitmap.png "},
@@ -15,11 +16,20 @@ export default function Clothes() {
     alert("Inquiry sent to suppliers!");
   };
 
-  const viewProduct = (name) => {
-    alert(`Viewing product: ${name}`);
-  };
-
   const navigate = useNavigate();
+  const { addToCart } = useCart();
+
+  const handleAddToCart = (product) => {
+    const price = parseFloat(product.price.replace('$', ''));
+    addToCart({
+      id: product.id,
+      title: product.name,
+      price: price,
+      image: product.img,
+      qty: 1,
+    });
+    alert(`${product.name} added to cart!`);
+  };
 
   const handlePageClick = (n) => {
     if (n === 1) {
@@ -60,12 +70,11 @@ export default function Clothes() {
       <h2 className="section-title">Recommended items</h2>
       <div className="product-grid">
         {products.map((p) => (
-          <div className="product-card" key={p.id}>
+          <div className="product-card" key={p.id} onClick={() => handleAddToCart(p)} style={{ cursor: 'pointer' }}>
             <img src={p.img} alt={p.name} />
             <h4>{p.price}</h4>
             <p>{p.name}</p>
-            <button onClick={() => viewProduct(p.name)}>Add-to-Cart</button>
-            {/* <button onClick={() => viewProduct(p.name)}>Add-to-Cart</button> */}
+            <button onClick={(e) => { e.stopPropagation(); handleAddToCart(p); }}>Add-to-Cart</button>
           </div>
         ))}
       </div>

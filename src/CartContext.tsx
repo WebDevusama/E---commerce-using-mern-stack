@@ -1,8 +1,38 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, ReactNode } from "react";
 
-const CartContext = createContext(null);
+/* =======================
+   TYPES
+======================= */
 
-export const useCart = () => {
+export interface CartItem {
+  id: number;
+  title: string;
+  price: number;
+  image: string;
+  qty: number;
+}
+
+interface CartContextType {
+  cartItems: CartItem[];
+  addToCart: (product: CartItem) => void;
+  removeFromCart: (id: number) => void;
+  updateQuantity: (id: number, qty: number) => void;
+  clearCart: () => void;
+  totalItems: number;
+  totalPrice: number;
+}
+
+interface CartProviderProps {
+  children: ReactNode;
+}
+
+/* =======================
+   CONTEXT
+======================= */
+
+const CartContext = createContext<CartContextType | undefined>(undefined);
+
+export const useCart = (): CartContextType => {
   const context = useContext(CartContext);
   if (!context) {
     throw new Error("useCart must be used inside CartProvider");
@@ -10,11 +40,15 @@ export const useCart = () => {
   return context;
 };
 
-export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
+/* =======================
+   PROVIDER
+======================= */
 
-  // ✅ ADD TO CART (merge qty if exists)
-  const addToCart = (product) => {
+export const CartProvider = ({ children }: CartProviderProps) => {
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+
+  // ✅ ADD TO CART
+  const addToCart = (product: CartItem) => {
     setCartItems((prev) => {
       const existing = prev.find((item) => item.id === product.id);
 
@@ -31,12 +65,12 @@ export const CartProvider = ({ children }) => {
   };
 
   // ✅ REMOVE ITEM
-  const removeFromCart = (id) => {
+  const removeFromCart = (id: number) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
   // ✅ UPDATE QUANTITY
-  const updateQuantity = (id, qty) => {
+  const updateQuantity = (id: number, qty: number) => {
     if (qty <= 0) {
       removeFromCart(id);
       return;
@@ -50,9 +84,7 @@ export const CartProvider = ({ children }) => {
   };
 
   // ✅ CLEAR CART
-  const clearCart = () => {
-    setCartItems([]);
-  };
+  const clearCart = () => setCartItems([]);
 
   // ✅ TOTALS
   const totalItems = cartItems.reduce((acc, item) => acc + item.qty, 0);
