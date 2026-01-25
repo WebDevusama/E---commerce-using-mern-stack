@@ -65,6 +65,7 @@ export default function Clothes() {
             <h4>{p.price}</h4>
             <p>{p.name}</p>
             <button onClick={() => viewProduct(p.name)}>Add-to-Cart</button>
+            {/* <button onClick={() => viewProduct(p.name)}>Add-to-Cart</button> */}
           </div>
         ))}
       </div>

@@ -7,7 +7,6 @@ import Button from 'react-bootstrap/Button'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useNavigate } from "react-router-dom";
 
-
 export default function CardGroup() {
     const navigate = useNavigate();
 
@@ -70,7 +69,8 @@ export default function CardGroup() {
                 {/* Buttons */}
                 <div className="d-grid gap-2 mb-2 w-100">
                   <Button  onClick={() => navigate("/Login")} variant="primary" size="sm">Login</Button>
-                  <Button variant="outline-secondary" size="sm">View Profile</Button>
+                  <Button  onClick={() => navigate("/Signup")} variant="outline-secondary" size="sm">Sign-up</Button>
+
                 </div>
 
                 {/* Offers */}
