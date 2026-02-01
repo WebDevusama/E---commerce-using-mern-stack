@@ -47,7 +47,8 @@ const Confirmation = () => {
       
       <Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
         <Button variant="outlined" onClick={() => navigate('/checkout/payment')}>Previous</Button>
-        <Button variant="contained" onClick={handlePlaceOrder}>Place Order</Button>
+        <Button variant="contained" onClick={()=> navigate ('/checkout')   }>Place Order</Button>
+
       </Box>
     </Box>
   );

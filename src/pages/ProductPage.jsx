@@ -11,7 +11,19 @@ export default function ProductPage() {
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-
+// Set your publishable key. Remember to change this to your live publishable key in production!
+// See your keys here: https://dashboard.stripe.com/apikeys
+const stripe = Stripe('pk_test_51Sq7wlDSuIXszcQY5ERFK0AHrrfNPwbNJDPzOBTQZLNUBy650OCpPIn22y4E8zvvzBArvwwKOdh1GOTNpBNBCtv500tSA6kqVR');
+const elements = stripe.elements();
+const options = {
+  amount: 9900, // 99.00 USD
+  currency: 'USD',
+  // (optional) the country that the end-buyer is in
+  countryCode: 'US',
+};
+const PaymentMessageElement =
+  elements.create('paymentMethodMessaging', options);
+PaymentMessageElement.mount('#payment-method-messaging-element');
   useEffect(() => {
     const fetchProducts = async () => {
       try {

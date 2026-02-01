@@ -1,9 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-
 import Confirmation from "../pages/Confirmation";
 import Delivery from "../pages/Delivery";
 import Payment from "../pages/Payment";
-
 import { CheckoutRoutePath } from "../routes/checkout-route-path";
 
 export default function CheckoutRoutes() {

@@ -1,24 +1,47 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Row, Col, ListGroup, Image, Button, Card } from "react-bootstrap";
 import { useCart } from "../CartContext";
-import Message from "../pages/Message";
 import Emptycart from "../pages/Emptycart";
+import { useEffect } from "react";
 
 const Cart = () => {
   const { cartItems, removeFromCart } = useCart();
   const navigate = useNavigate();
 
+  // ✅ Stripe Payment Messaging (runs AFTER render)
+  useEffect(() => {
+    if (!window.Stripe) return;
+
+    const stripe = window.Stripe(
+      "pk_test_51Sq7wlDSuIXszcQY5ERFK0AHrrfNPwbNJDPzOBTQZLNUBy650OCpPIn22y4E8zvvzBArvwwKOdh1GOTNpBNBCtv500tSA6kqVR"
+    );
+
+    const elements = stripe.elements();
+
+    const paymentMessage = elements.create(
+      "paymentMethodMessaging",
+      {
+        amount: 9900,
+        currency: "USD",
+        countryCode: "US",
+      }
+    );
+
+    paymentMessage.mount("#payment-method-messaging-element");
+
+    return () => {
+      paymentMessage.destroy();
+    };
+  }, []);
+
   const handleRemove = (id, title) => {
     const confirmed = window.confirm(
-      `Are you sure you want to remove "${title}" from the cart?`
+      `Are you sure you want to remove "${title}" from the cart?"`
     );
 
     if (confirmed) {
       removeFromCart(id);
-      
-      // Check if cart will be empty after removal
-      const newLength = cartItems.length - 1;
-      if (newLength === 0) {
+      if (cartItems.length - 1 === 0) {
         navigate("/emptycart");
       }
     }
@@ -41,32 +64,21 @@ const Cart = () => {
               <ListGroup.Item key={index}>
                 <Row className="align-items-center">
                   <Col md={2}>
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fluid
-                      rounded
-                    />
+                    <Image src={item.image} alt={item.title} fluid rounded />
                   </Col>
 
                   <Col md={4}>
-                    <Link to={`/product/${item.id}`}>
-                      {item.title}
-                    </Link>
+                    <Link to={`/product/${item.id}`}>{item.title}</Link>
                   </Col>
 
                   <Col md={2}>${item.price}</Col>
-
-                  <Col md={2}>
-                    Qty: {item.qty || 1}
-                  </Col>
+                  <Col md={2}>Qty: {item.qty || 1}</Col>
 
                   <Col md={2}>
                     <Button
                       type="button"
                       variant="light"
                       onClick={() => handleRemove(item.id, item.title)}
-                      aria-label={`Remove ${item.title} from cart`}
                     >
                       ❌
                     </Button>
@@ -82,17 +94,20 @@ const Cart = () => {
         <Card>
           <ListGroup variant="flush">
             <ListGroup.Item>
-              <h4>
-                Subtotal ({cartItems.length}) items
-              </h4>
+              <h4>Subtotal ({cartItems.length}) items</h4>
               <strong>${subtotal}</strong>
+            </ListGroup.Item>
+
+            {/* ✅ Stripe messaging mounts here */}
+            <ListGroup.Item>
+              <div id="payment-method-messaging-element"></div>
             </ListGroup.Item>
 
             <ListGroup.Item>
               <Button
                 className="w-100"
                 disabled={cartItems.length === 0}
-                onClick={() => navigate("/checkout")}
+                onClick={() => navigate("/payment")}
               >
                 Proceed To Checkout
               </Button>
