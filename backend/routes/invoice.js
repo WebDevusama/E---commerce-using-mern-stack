@@ -1,5 +1,5 @@
 const express = require("express");
-const Order = require("../models/Order");
+const Order = require("../Users-module/order");
 const generateInvoice = require("../utils/invoiceGenerator");
 const router = express.Router();
 

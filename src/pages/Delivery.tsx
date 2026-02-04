@@ -20,7 +20,7 @@ const Delivery = () => {
     e.preventDefault();
     // Save to localStorage or context
     localStorage.setItem('delivery', JSON.stringify(formData));
-    navigate('/checkout/payment');
+    navigate('/checkout/confirmation');
   };
 
   return (

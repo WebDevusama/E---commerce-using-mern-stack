@@ -1,5 +1,5 @@
 const express = require("express");
-const Order = require("../models/Order");
+const Order = require("../Users-module/order");
 const router = express.Router();
 
 // Get all orders
