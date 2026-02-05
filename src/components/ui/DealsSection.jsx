@@ -53,7 +53,7 @@ export default function DealsSection() {
         </div>
 
         {deals.map((item, index) => (
-          <div className="deal-card" key={index} onClick={() => handleAddToCart(item)} style={{ cursor: 'pointer' }}>
+          <div className="deal-card" key={`deal-${item.id}-${index}`} onClick={() => handleAddToCart(item)} style={{ cursor: 'pointer' }}>
             <img src={item.img} alt={item.title} />
             <p>{item.title}</p>
             <span className="discount">{item.discount}</span>
@@ -70,7 +70,7 @@ export default function DealsSection() {
         </div>
 
         {categories.map((item, index) => (
-          <div className="category-card" key={index} onClick={() => handleAddToCart(item)} style={{ cursor: 'pointer' }}>
+          <div className="category-card" key={`cat-${item.id}-${index}`} onClick={() => handleAddToCart(item)} style={{ cursor: 'pointer' }}>
             <div>
               <h4>{item.title}</h4>
               <p>From USD {item.price}</p>

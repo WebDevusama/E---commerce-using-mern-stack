@@ -69,8 +69,8 @@ export default function Clothes() {
       {/* PRODUCTS */}
       <h2 className="section-title">Recommended items</h2>
       <div className="product-grid">
-        {products.map((p) => (
-          <div className="product-card" key={p.id} onClick={() => handleAddToCart(p)} style={{ cursor: 'pointer' }}>
+        {products.map((p, index) => (
+          <div className="product-card" key={`${p.id}-${index}`} onClick={() => handleAddToCart(p)} style={{ cursor: 'pointer' }}>
             <img src={p.img} alt={p.name} />
             <h4>{p.price}</h4>
             <p>{p.name}</p>

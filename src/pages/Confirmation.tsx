@@ -101,8 +101,8 @@ const Confirmation = () => {
       <Paper sx={{ p: 2, mb: 3 }}>
         <Typography variant="h6" gutterBottom>Order Summary</Typography>
         <List>
-          {cartItems.map((item) => (
-            <ListItem key={item.id}>
+          {cartItems.map((item, index) => (
+            <ListItem key={`${item.id}-${index}`}>
               <ListItemText primary={item.title} secondary={`Qty: ${item.qty} x $${item.price}`} />
               <Typography>${(item.price * item.qty).toFixed(2)}</Typography>
             </ListItem>

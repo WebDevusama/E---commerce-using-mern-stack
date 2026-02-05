@@ -2,22 +2,17 @@ import React, { FunctionComponent, useEffect } from "react";
 import { Box, Paper, Button } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
-// Note: this component does not require Stripe.js to redirect
-// to a Checkout session URL returned by the backend.
 
 import CheckoutRoutes from "../routes/checkout-routes";
-
-// Stripe client library is optional here — the backend returns a
-// session URL and we perform a simple redirect. If you need
-// Stripe.js features (e.g. Elements) provide `VITE_STRIPE_PUBLISHABLE_KEY`.
-
- 
 
 // ===============================
 // Component
 // ===============================
 export const Checkout: FunctionComponent = () => {
   const location = useLocation();
+
+  // ✅ Example total amount (replace with cart total)
+  const totalAmount = 100; // USD
 
   useEffect(() => {
     console.log("Checkout route changed:", location.pathname);
@@ -32,22 +27,32 @@ export const Checkout: FunctionComponent = () => {
         "http://localhost:5000/create-checkout-session",
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            amount: totalAmount, // ✅ REQUIRED
+          }),
         }
       );
+
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.error || "Checkout session failed");
+      }
 
       const session = await response.json();
 
       if (!session.url) {
-        toast.error("Failed to create checkout session");
+        toast.error("Stripe session URL missing");
         return;
       }
 
-      // Redirect to Stripe Checkout
+      // ✅ Redirect to Stripe Checkout
       window.location.href = session.url;
     } catch (error) {
-      console.error(error);
-      toast.error("Payment failed");
+      console.error("Checkout error:", error);
+      toast.error("Payment failed. Please try again.");
     }
   };
 
@@ -65,7 +70,6 @@ export const Checkout: FunctionComponent = () => {
         >
           Pay with Stripe
         </Button>
-
       </Box>
     </Paper>
   );

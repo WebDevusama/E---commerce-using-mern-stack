@@ -126,6 +126,12 @@ app.post("/create-checkout-session", async (req, res) => {
       quantity: item.qty || 1,
     }));
 
+    // Total amount in cents (required by Order schema)
+    const amount = items.reduce(
+      (sum, item) => sum + Math.round((item.price || 0) * 100) * (item.qty || 1),
+      0
+    );
+
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       payment_method_types: ["card"],
@@ -136,8 +142,14 @@ app.post("/create-checkout-session", async (req, res) => {
 
     await Order.create({
       stripeSessionId: session.id,
-      status: "PENDING",
-      items,
+      amount,
+      status: "pending",
+      items: items.map((item) => ({
+        productId: String(item.id),
+        name: item.title,
+        price: Math.round((item.price || 0) * 100),
+        quantity: item.qty || 1,
+      })),
     });
 
     res.json({ url: session.url });
@@ -168,7 +180,7 @@ app.post("/webhook", (req, res) => {
   if (event.type === "checkout.session.completed") {
     Order.findOneAndUpdate(
       { stripeSessionId: event.data.object.id },
-      { status: "PAID" }
+      { status: "paid" }
     ).exec();
   }
 

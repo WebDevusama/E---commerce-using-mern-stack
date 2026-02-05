@@ -24,17 +24,14 @@ const Payment = () => {
 
   const handleCheckout = async () => {
     try {
-      const resp = await fetch(
-        `${BACKEND_URL}/create-checkout-session`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            items: cartItems,
-            delivery,
-          }),
-        }
-      );
+      const resp = await fetch(`${BACKEND_URL}/create-checkout-session`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: cartItems,
+          delivery,
+        }),
+      });
 
       const data = await resp.json();
 
@@ -69,9 +66,10 @@ const Payment = () => {
       {/* Order */}
       <Paper sx={{ p: 2, mb: 3 }}>
         <Typography variant="h6">Order Summary</Typography>
+
         <List>
-          {cartItems.map((item) => (
-            <ListItem key={item.id}>
+          {cartItems.map((item, index) => (
+            <ListItem key={`${item.id}-${index}`}>
               <ListItemText
                 primary={item.title}
                 secondary={`Qty: ${item.qty || 1} × $${item.price}`}
